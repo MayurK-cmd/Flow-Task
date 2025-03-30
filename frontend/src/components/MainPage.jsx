@@ -1,3 +1,5 @@
+
+
 import { Link, Routes, Route, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import Tasks from "../pages/Tasks";
@@ -19,36 +21,36 @@ const MainPage = () => {
   };
 
   return (
-    <div className="flex h-screen">
-      {/* Sidebar */}
-      <div className="w-1/4 bg-white text-black p-6 flex flex-col border-r shadow-md">
-        <nav className="space-y-4">
-          <Link to="/home" className="block py-2 px-4 rounded-md hover:bg-gray-200">
-            Dashboard
-          </Link>
-          <Link to="/home/tasks" className="block py-2 px-4 rounded-md hover:bg-gray-200">
-            Tasks
-          </Link>
-          <Link to="/home/category" className="block py-2 px-4 rounded-md hover:bg-gray-200">
-            Category
-          </Link>
-        </nav>
+    <div className="h-screen flex flex-col">
+      {/* Navbar (Full Width) */}
+      <div className="bg-white text-black py-4 px-6 flex justify-between items-center shadow-md w-full">
+        <h1 className="text-2xl font-bold">FlowTask</h1>
+        <div className="flex items-center">
+          <span className="text-lg font-semibold mr-4">{firstName}</span>
+          <button
+            onClick={handleLogout}
+            className="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700"
+          >
+            Logout
+          </button>
+        </div>
       </div>
 
-      {/* Main Content */}
-      <div className="flex-1 flex flex-col">
-        {/* Navbar (Top Bar) */}
-        <div className="bg-white text-black py-4 px-6 flex justify-between items-center shadow-md">
-          <h1 className="text-2xl font-bold">FlowTask</h1>
-          <div className="flex items-center">
-            <span className="text-lg font-semibold mr-4">{firstName}</span>
-            <button
-              onClick={handleLogout}
-              className="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700"
-            >
-              Logout
-            </button>
-          </div>
+      {/* Main Content with Sidebar */}
+      <div className="flex flex-1">
+        {/* Sidebar Links */}
+        <div className="w-1/4 bg-white text-black p-6 border-r shadow-md">
+          <nav className="space-y-4">
+            <Link to="/home" className="block py-2 px-4 rounded-md hover:bg-gray-200">
+              Dashboard
+            </Link>
+            <Link to="/home/tasks" className="block py-2 px-4 rounded-md hover:bg-gray-200">
+              Tasks
+            </Link>
+            <Link to="/home/category" className="block py-2 px-4 rounded-md hover:bg-gray-200">
+              Category
+            </Link>
+          </nav>
         </div>
 
         {/* Page Content */}
