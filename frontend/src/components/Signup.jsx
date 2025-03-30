@@ -6,9 +6,9 @@ import "react-toastify/dist/ReactToastify.css";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 const Signup = () => {
-  const [Firstname, setFirstname] = useState("");
-  const [Lastname, setLastname] = useState("");
-  const [email, setEmail] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [emailId, setEmailId] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [passwordError, setPasswordError] = useState("");
@@ -38,7 +38,7 @@ const Signup = () => {
 
     try {
       const res = await axios.post("http://localhost:3000/auth/signup", { 
-        Firstname, Lastname, email, password 
+        firstName, lastName, emailId, password 
       });
 
       localStorage.setItem("token", res.data.token);
@@ -67,24 +67,24 @@ const Signup = () => {
           <input
             type="text"
             placeholder="First Name"
-            value={Firstname}
-            onChange={(e) => setFirstname(e.target.value)}
+            value={firstName}
+            onChange={(e) => setFirstName(e.target.value)}
             required
             className="w-full px-4 py-2 border rounded-lg text-gray-900 focus:ring-2 focus:ring-blue-500"
           />
           <input
             type="text"
             placeholder="Last Name"
-            value={Lastname}
-            onChange={(e) => setLastname(e.target.value)}
+            value={lastName}
+            onChange={(e) => setLastName(e.target.value)}
             required
             className="w-full px-4 py-2 border rounded-lg text-gray-900 focus:ring-2 focus:ring-blue-500"
           />
           <input
             type="email"
-            placeholder="Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Email ID"
+            value={emailId}
+            onChange={(e) => setEmailId(e.target.value)}
             required
             className="w-full px-4 py-2 border rounded-lg text-gray-900 focus:ring-2 focus:ring-blue-500"
           />

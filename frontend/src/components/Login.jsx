@@ -5,7 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const Login = () => {
-  const [email, setEmail] = useState("");
+  const [emailId, setemailId] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
@@ -52,10 +52,10 @@ const Login = () => {
           <h2 className="text-3xl font-semibold text-center mb-6">Login</h2>
           <form onSubmit={handleSubmit} className="space-y-4">
             <input 
-              type="email" 
-              placeholder="Email" 
-              value={email} 
-              onChange={(e) => setEmail(e.target.value)} 
+              type="emailId" 
+              placeholder="Email ID" 
+              value={emailId} 
+              onChange={(e) => setemailId(e.target.value)} 
               className="w-full px-4 py-2 border rounded-md focus:ring-2 focus:ring-blue-400"
               required 
             />
