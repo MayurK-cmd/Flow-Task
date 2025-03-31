@@ -4,6 +4,7 @@ import { FaSearch } from "react-icons/fa";
 import { Menu, X } from "lucide-react";
 import AddTaskModal from "../components/Modals/AddTaskModal";
 import SearchModal from "../components/Modals/SearchModal";
+import TaskModal from "../components/Modals/TaskModal";
 
 const Tasks = () => {
   const navigate = useNavigate();
@@ -12,15 +13,17 @@ const Tasks = () => {
   const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [newTask, setNewTask] = useState({ title: "", description: "", category: "" });
-  const [firstName, setFirstName] = useState("John"); // Default user name
+  const [firstName, setFirstName] = useState("John");
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedStatus, setSelectedStatus] = useState("");
+  const [selectedTask, setSelectedTask] = useState(null);
+  const [isTaskModalOpen, setIsTaskModalOpen] = useState(false);
 
   useEffect(() => {
     setTasks([
-      { id: 1, title: "Task 1", completed: false, category: "Work" },
-      { id: 2, title: "Task 2", completed: true, category: "Personal" },
+      { id: 1, title: "Task 1", description: "Description 1", completed: false, category: "Work" },
+      { id: 2, title: "Task 2", description: "Description 2", completed: true, category: "Personal" },
     ]);
   }, []);
 
@@ -52,6 +55,16 @@ const Tasks = () => {
     } else {
       alert("Title and category are required.");
     }
+  };
+
+  const handleOpenTaskModal = (task) => {
+    setSelectedTask(task);
+    setIsTaskModalOpen(true);
+  };
+
+  const handleCloseTaskModal = () => {
+    setIsTaskModalOpen(false);
+    setSelectedTask(null);
   };
 
   const filteredTasks = tasks.filter((task) => {
@@ -112,7 +125,7 @@ const Tasks = () => {
 
           <ul className="space-y-3">
             {filteredTasks.map((task) => (
-              <li key={task.id} className="p-4 border rounded-md shadow-sm">
+              <li key={task.id} className="p-4 border rounded-md shadow-sm cursor-pointer hover:bg-gray-100" onClick={() => handleOpenTaskModal(task)}>
                 <span className={task.completed ? "line-through text-gray-500" : ""}>
                   {task.title} ({task.category})
                 </span>
@@ -124,6 +137,9 @@ const Tasks = () => {
 
       <AddTaskModal isOpen={isModalOpen} onClose={handleCloseModal} onAdd={handleAddTask} newTask={newTask} handleChange={handleChange} categories={categories} />
       <SearchModal isOpen={isSearchModalOpen} onClose={handleCloseSearchModal} searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+      {selectedTask && (
+        <TaskModal isOpen={isTaskModalOpen} onClose={handleCloseTaskModal} task={selectedTask} />
+      )}
     </div>
   );
 };
